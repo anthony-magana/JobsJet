@@ -3,7 +3,7 @@ import NextLink from "next/link"
 import {MoonIcon, SunIcon} from '@chakra-ui/icons'
 import { useUser } from '@auth0/nextjs-auth0';
 
-function navbar() {
+function Navbar() {
 
     const { colorMode, toggleColorMode } = useColorMode()
     const { user, error, isLoading } = useUser();
@@ -46,4 +46,4 @@ function navbar() {
     )
 }
 
-export default navbar
+export default Navbar

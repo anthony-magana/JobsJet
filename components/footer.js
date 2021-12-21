@@ -1,6 +1,6 @@
 import { Divider, Text, Link } from '@chakra-ui/react'
 
-function footer() {
+function Footer() {
     return (
         <footer style={{width: '75%', margin: '25px auto'}}>
             <Divider size='2px' />
@@ -13,4 +13,4 @@ function footer() {
     )
 }
 
-export default footer
+export default Footer

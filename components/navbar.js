@@ -60,7 +60,7 @@ function Navbar() {
                     </div>
                 }
                 { isMobile &&
-                    <IconButton onClick={onOpen} m={4} icon={ <HamburgerIcon />} m='0' />
+                    <IconButton onClick={onOpen} icon={ <HamburgerIcon />} />
                 }
                 <Drawer onClose={onClose} isOpen={isOpen} size='xs'>
                     <DrawerOverlay />

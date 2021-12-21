@@ -24,10 +24,6 @@ function Navbar() {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [isMobile] = useMediaQuery('(max-width: 762px)')
 
-    const handleClick = () => {
-        onOpen()
-    }
-
     if(isLoading) {
         return <div>Loading...</div>
     }
@@ -64,7 +60,7 @@ function Navbar() {
                     </div>
                 }
                 { isMobile &&
-                    <IconButton onClick={() => handleClick()} m={4} icon={ <HamburgerIcon />} m='0' />
+                    <IconButton onClick={() => onOpen()} m={4} icon={ <HamburgerIcon />} m='0' />
                 }
                 <Drawer onClose={onClose} isOpen={isOpen} size='xs'>
                     <DrawerOverlay />

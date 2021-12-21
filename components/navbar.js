@@ -1,10 +1,19 @@
 import { useColorMode, IconButton, Box, Heading, Link } from '@chakra-ui/react'
 import NextLink from "next/link"
 import {MoonIcon, SunIcon} from '@chakra-ui/icons'
+import { useUser } from '@auth0/nextjs-auth0';
 
 function navbar() {
 
     const { colorMode, toggleColorMode } = useColorMode()
+    const { user, error, isLoading } = useUser();
+
+    if(isLoading) {
+        return <div>Loading...</div>
+    }
+    if(error) {
+        return <div>{error.message}</div>
+    }
 
     return (
         <header>
@@ -21,9 +30,16 @@ function navbar() {
                     <NextLink href='/contact' passHref>
                         <Link style={{paddingRight: '15px'}}>Contact</Link>
                     </NextLink>
-                    <NextLink href='/login' passHref>
-                        <Link>Login</Link>
-                    </NextLink>
+                    {!user ?
+                        (<NextLink href='/api/auth/login' passHref>
+                            <Link>Login</Link>
+                        </NextLink>
+                        ) :
+                        (<NextLink href='/api/auth/logout' passHref>
+                            <Link>Logout</Link>
+                        </NextLink>
+                        )
+                    }
                 </div>
             </Box>
         </header>

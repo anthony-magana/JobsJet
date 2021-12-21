@@ -1,6 +1,7 @@
 import styles from '../styles/Home.module.css'
 import Head from 'next/head'
 import Image from 'next/image'
+import NextLink from "next/link"
 import { Heading, Box, Text, Button, Grid, GridItem } from '@chakra-ui/react'
 import { AddIcon, StarIcon, UnlockIcon } from '@chakra-ui/icons'
 
@@ -16,7 +17,7 @@ export default function Home() {
           <div>
             <Heading as='h1' maxW='md' size='xl' style={{marginBottom: '20px'}}>Find the perfect match for you with just a swipe!</Heading>
             <Text style={{marginBottom: '15px'}}>Match employers or talent based on field category, start now.</Text>
-            <Button>Sign Up</Button>
+            <Button><NextLink href="/api/auth/login">Sign Up</NextLink></Button>
           </div>
           <Image 
             src="/homeimg.png"
@@ -27,7 +28,7 @@ export default function Home() {
         </Box>
         <Box style={{marginTop: '100px', marginBottom: '150px'}}>
           <Text color='purple.500' fontSize='lg' fontWeight='bold' align='center' style={{marginBottom: '5px'}}>Our Services</Text>
-          <Text fontSize='3xl' align='center'>We provide Best Quality Services</Text>
+          <Text fontSize='3xl' align='center'>We provide the Best Quality Services</Text>
           <Text fontSize='md' align='center' maxW='xl' margin='0 auto' style={{marginTop: '10px', marginBottom: '45px'}}>
             Our commitment to quality ensures that our applications and services get the best functionality and user experience possible. Jobs Jet is more 
             than just a web app, but the entire job hiring experience.

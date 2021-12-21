@@ -53,7 +53,7 @@ export default function Home() {
                 <StarIcon fontSize='3xl' color='white' margin='0px 0 25px 0' />
                 <Text fontWeight='bold' fontSize='lg' color='white' align='center'>Jobs Jet Gold</Text>
                 <Text fontSize='md' color='white' textAlign='center' padding='15px 5px'>
-                Jobs Jet Gold™ saves time by letting you see who Likes you. Match, pass, and expand photos to view full profiles with a simple tap and get more efficient with your time online.
+                Jobs Jet Gold saves time by letting you see who Likes you. Match, pass, and expand photos to view full profiles with a simple tap and get more efficient with your time online.
                 </Text>
               </Box>
             </GridItem>
@@ -62,7 +62,7 @@ export default function Home() {
                 <UnlockIcon fontSize='3xl' color='white' margin='0px 0 25px 0' />
                 <Text fontWeight='bold' fontSize='lg' color='white' align='center'>Jobs Jet Platinum</Text>
                 <Text fontSize='md' color='white' textAlign='center' padding='15px 5px'>
-                  Enjoy all of Jobs Jet's premium features while getting maximum visibility on the app. Jobs Jet Platinum is the ultimate job-finding service.
+                  Enjoy all of Jobs Jet&apos;s premium features while getting maximum visibility on the app. Jobs Jet Platinum is the ultimate job-finding service.
                 </Text>
               </Box>
             </GridItem>

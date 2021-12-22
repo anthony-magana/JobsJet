@@ -11,9 +11,11 @@ import {
     DrawerContent,
     DrawerCloseButton,
     useDisclosure,
-    useMediaQuery
+    useMediaQuery,
+    Button
 } from '@chakra-ui/react'
 import NextLink from "next/link"
+import { useRouter } from 'next/router'
 import {MoonIcon, SunIcon, HamburgerIcon} from '@chakra-ui/icons'
 import { useUser } from '@auth0/nextjs-auth0';
 
@@ -23,6 +25,7 @@ function Navbar() {
     const { user, error, isLoading } = useUser();
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [isMobile] = useMediaQuery('(max-width: 762px)')
+    const router = useRouter()
 
     if(isLoading) {
         return <div>Loading...</div>
@@ -30,6 +33,7 @@ function Navbar() {
     if(error) {
         return <div>{error.message}</div>
     }
+
 
     return (
         <header>
@@ -47,20 +51,26 @@ function Navbar() {
                         <NextLink href='/contact' passHref>
                             <Link style={{paddingRight: '15px'}}>Contact</Link>
                         </NextLink>
-                        {!user ?
+                        {!user &&
                             (<NextLink href='/api/auth/login' passHref>
-                                <Link>Login</Link>
+                                <Button size='sm'>Login</Button>
                             </NextLink>
-                            ) :
+                            )
+                        } 
+                        {user && router.asPath !== '/dashboard' ? 
+                            (<NextLink href='/dashboard' passHref>
+                                <Button size='sm'>dashboard</Button>
+                            </NextLink>
+                            ) : user &&
                             (<NextLink href='/api/auth/logout' passHref>
-                                <Link>Logout</Link>
+                                <Button size='sm'>Logout</Button>
                             </NextLink>
                             )
                         }
                     </div>
                 }
                 { isMobile &&
-                    <IconButton onClick={onOpen} icon={ <HamburgerIcon />} />
+                    <IconButton aria-label='toggle menu' onClick={onOpen} icon={ <HamburgerIcon />} />
                 }
                 <Drawer onClose={onClose} isOpen={isOpen} size='xs'>
                     <DrawerOverlay />
@@ -77,13 +87,19 @@ function Navbar() {
                             <NextLink href='/contact' passHref>
                                 <Link onClick={onClose} fontSize='xl' mb='5'>Contact</Link>
                             </NextLink>
-                            {!user ?
+                            {!user &&
                                 (<NextLink href='/api/auth/login' passHref>
                                     <Link onClick={onClose} fontSize='xl' mb='5' >Login</Link>
                                 </NextLink>
-                                ) :
+                                ) 
+                            }
+                            {user && router.asPath !== '/dashboard' ? 
+                                (<NextLink href='/dashboard' passHref>
+                                    <Link onClick={onClose} fontSize='xl' mb='5'>Dashboard</Link>
+                                </NextLink>
+                                ) : user &&
                                 (<NextLink href='/api/auth/logout' passHref>
-                                    <Link onClick={onClose} fontSize='xl' mb='5' >Logout</Link>
+                                    <Link onClick={onClose} fontSize='xl' mb='5'>Logout</Link>
                                 </NextLink>
                                 )
                             }

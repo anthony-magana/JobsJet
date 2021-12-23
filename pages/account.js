@@ -47,7 +47,7 @@ function Account() {
                 </FormControl>
                 <FormControl mb='5'>
                     <FormLabel htmlFor='text-area'>About</FormLabel>
-                    <textarea id='about' rows="5" maxlength="200" placeholder="About ...." style={{backgroundColor: 'inherit', minWidth: '300px', maxWidth: '700px', width: '100%', border: '1px solid rgb(82,85,94, 0.6)'}} />
+                    <textarea id='about' rows="5" maxLength="200" placeholder="About ...." style={{backgroundColor: 'inherit', minWidth: '300px', maxWidth: '700px', width: '100%', border: '1px solid rgb(82,85,94, 0.6)'}} />
                     <FormHelperText>Max length is 200 characters</FormHelperText>
                 </FormControl>
                 <FormControl mb='5' isRequired>

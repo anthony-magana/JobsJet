@@ -29,6 +29,7 @@ export default function Dashboard() {
               Dashboard
             </Box>
             <Text>Welcome back, {user?.name}</Text>
+            <Button>Account</Button>
             <Box fontWeight="bold" as="h2" fontSize="3xl" mt="50px" mb="20px">
               Start Matching
             </Box>

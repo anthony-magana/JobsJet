@@ -1,5 +1,6 @@
 import { withPageAuthRequired, useUser } from "@auth0/nextjs-auth0";
 import Head from "next/head";
+import Link from "next/link";
 import { Box, Text, Button, Divider, Badge, Image } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 
@@ -28,8 +29,10 @@ export default function Dashboard() {
             <Box fontWeight="bold" as="h1" fontSize="3xl" mb="10px">
               Dashboard
             </Box>
-            <Text>Welcome back, {user?.name}</Text>
-            <Button>Account</Button>
+            <Box display='flex' alignItems='center'>
+                <Text mr='5'>Welcome back, {user?.name}</Text>
+                <Button size='sm'><Link href='/account' passHref>Account</Link></Button>
+            </Box>
             <Box fontWeight="bold" as="h2" fontSize="3xl" mt="50px" mb="20px">
               Start Matching
             </Box>
@@ -95,7 +98,7 @@ export default function Dashboard() {
             <Divider orientation="vertical" />
             <Box ml="25px" display="flex" flexDir="column">
               <Box fontWeight="bold" as="h2" fontSize="2xl" mb="15px">
-                Messages
+                Your Messages:
               </Box>
               <Button size="sm" variant="outline" mb="20px">
                 New Message

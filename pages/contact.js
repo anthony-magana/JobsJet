@@ -1,9 +1,10 @@
+import { Box } from "@chakra-ui/react";
 
 function Contact() {
     return (
-        <div>
-            Contact
-        </div>
+        <Box w="75%" m="0 auto" mt="75px">
+            Contact Page
+        </Box>
     )
 }
 

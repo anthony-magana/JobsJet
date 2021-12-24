@@ -31,7 +31,7 @@ export default function Dashboard() {
             </Box>
             <Box display='flex' alignItems='center'>
                 <Text mr='5'>Welcome back, {user?.name}</Text>
-                <Button size='sm'><Link href='/account' passHref>Account</Link></Button>
+                <Button size='sm'><Link href='/account'>Account</Link></Button>
             </Box>
             <Box fontWeight="bold" as="h2" fontSize="3xl" mt="50px" mb="20px">
               Start Matching

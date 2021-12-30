@@ -21,9 +21,8 @@ export default async function (req, res) {
                 const profile = await Profile.create(req.body);
 
                 res.status(201).json({ success: true, data: profile });
-            }
-            catch (error) {
-                res.status(400).json({ success: false });
+            } catch (error) {
+                res.status(400).json({ success: false, error: 'errorrrr' });
             }
             break;
         default:

@@ -4,7 +4,8 @@ import Link from "next/link";
 import { Box, Text, Button, Divider, Badge, Image } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 
-export default function Dashboard() {
+
+export default function Dashboard({ profiles }) {
   const { user } = useUser();
 
   const property = {
@@ -18,12 +19,15 @@ export default function Dashboard() {
     rating: 4,
   };
 
+  console.log(profiles);
+
   return (
     <>
       <Head>
         <title>Jobs Jet - Dashboard</title>
       </Head>
       <Box w="75%" m="0 auto" mt="75px" minH="70vh">
+        
         <Box display="flex" justifyContent="space-between">
           <Box>
             <Box fontWeight="bold" as="h1" fontSize="3xl" mb="10px">
@@ -114,4 +118,15 @@ export default function Dashboard() {
   );
 }
 
-export const getServerSideProps = withPageAuthRequired();
+export const getServerSideProps = withPageAuthRequired({
+    async getServerSideProps(ctx) {
+        // Getting user data from Auth0, returns an object like this one: {name: 'Bob', email: 'bob@email.com', email_verified: true}
+        // const user = getSession(ctx.req).user
+
+        const res = await fetch("http://localhost:3000/api/profiles");
+        const { data } = await res.json();
+        return { 
+            props: {profiles: data}
+        }
+    }
+});

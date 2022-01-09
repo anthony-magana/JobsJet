@@ -10,6 +10,10 @@ const ProfileSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    picture: {
+        type: String,
+        required: false,
+    },
     address: {
         type: String,
         required: false

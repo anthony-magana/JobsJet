@@ -17,7 +17,7 @@ export default function Dashboard({ profiles }) {
       </Head>
       <Box w="75%" m="0 auto" mt="75px" minH="70vh">
         
-        <Box display="flex" justifyContent="space-between">
+        <Box display="flex" justifyContent="space-between" flexWrap='wrap'>
           <Box>
             <Box fontWeight="bold" as="h1" fontSize="3xl" mb="10px">
               Dashboard
@@ -34,7 +34,7 @@ export default function Dashboard({ profiles }) {
                 <Person key={profile._id} profile={profile} />
             ))}
           </Box>
-          <Box display="flex" minH="65vh">
+          <Box display="flex" minH="65vh" mt='10'>
             <Divider orientation="vertical" />
             <Box ml="25px" display="flex" flexDir="column">
               <Box fontWeight="bold" as="h2" fontSize="2xl" mb="15px">
@@ -58,8 +58,8 @@ export const getServerSideProps = withPageAuthRequired({
     async getServerSideProps(ctx) {
         // Getting user data from Auth0, returns an object like this one: {name: 'Bob', email: 'bob@email.com', email_verified: true}
         // const user = getSession(ctx.req).user
-
-        const res = await fetch("http://localhost:3000/api/profiles");
+        const { req } = ctx;
+        const res = await fetch(`http://${req.headers.host}/api/profiles`);
         const { data } = await res.json();
         return { 
             props: {profiles: data}

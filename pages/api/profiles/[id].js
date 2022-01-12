@@ -1,9 +1,10 @@
 import dbConnect from "../../../utils/dbConnect";
 import Profile from "../../../models/Profile";
+import { withApiAuthRequired } from '@auth0/nextjs-auth0'
 
 dbConnect();
 
-export default async function (req, res) {
+export default withApiAuthRequired(async function (req, res) {
     const {
         query: { id },
         method
@@ -56,4 +57,4 @@ export default async function (req, res) {
             res.status(400).json({ success: false });
             break;
     }
-}
+});

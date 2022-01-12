@@ -7,8 +7,8 @@ import Person from "../components/person";
 export default function Dashboard({ profiles }) {
   const { user } = useUser();
 
-  console.log(profiles);
-  console.log(user);
+//   console.log(profiles);
+//   console.log(user);
 
   return (
     <>
@@ -59,8 +59,11 @@ export const getServerSideProps = withPageAuthRequired({
         // Getting user data from Auth0, returns an object like this one: {name: 'Bob', email: 'bob@email.com', email_verified: true}
         // const user = getSession(ctx.req).user
         const { req } = ctx;
-        const res = await fetch(`http://${req.headers.host}/api/profiles`);
+        const res = await fetch(`http://${req.headers.host}/api/profiles`, {
+            headers: { Cookie: ctx.req.headers.cookie },
+        });
         const { data } = await res.json();
+        console.log('response: ', res);
         return { 
             props: {profiles: data}
         }

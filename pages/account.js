@@ -6,7 +6,6 @@ function Account({person}) {
     const { user } = useUser();
     const [emailInput, setEmailInput] = useState(user?.email);
     const [nameInput, setNameInput] = useState(user?.nickname);
-    const [addressInput, setAddressInput] = useState('');
     const [cityInput, setCityInput] = useState('');
     const [countryInput, setCountryInput] = useState('');
     const [stateInput, setStateInput] = useState('');
@@ -37,15 +36,6 @@ function Account({person}) {
                         placeholder='First name' 
                         value={nameInput} 
                         onChange={(e) => setNameInput(e.target.value)}
-                    />
-                </FormControl>
-                <FormControl mb='5'>
-                    <FormLabel htmlFor='address'>Address</FormLabel>
-                    <Input 
-                        id='address' 
-                        placeholder='Address' 
-                        value={addressInput} 
-                        onChange={(e) => setAddressInput(e.target.value)}
                     />
                 </FormControl>
                 <FormControl mb='5' isRequired>
@@ -164,7 +154,9 @@ export default Account
 export const getServerSideProps = withPageAuthRequired({
     async getServerSideProps(ctx) {
         const { req } = ctx;
-        const res = await fetch(`http://${req.headers.host}/api/profiles`);
+        const res = await fetch(`http://${req.headers.host}/api/profiles`, {
+            headers: { Cookie: ctx.req.headers.cookie },
+        });
         const { data } = await res.json();
 
         const user = getSession(ctx.req).user

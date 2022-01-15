@@ -35,7 +35,7 @@ const ProfileSchema = new mongoose.Schema({
         required: false,
         maxlength: [300, 'About can only be 300 characters']
     },
-    lookingFor: {
+    interest: {
         type: String,
         required: false
     },
@@ -48,7 +48,7 @@ const ProfileSchema = new mongoose.Schema({
         required: false
     },
     experience: {
-        type: [String],
+        type: String,
         required: false
     },
     education: {

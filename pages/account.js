@@ -212,9 +212,9 @@ function Account({person}) {
                             <option>Graphic Design</option>
                         </Select>
                     </FormControl>
-                    <FormControl onChange={(e) => setYearsExperience(e.target.value)} value={yearsExperience}>
+                    <FormControl onChange={(e) => setYearsExperience(e.target.value)}>
                         <FormLabel htmlFor='number'>Years of experience</FormLabel>
-                        <NumberInput max={10} min={0}>
+                        <NumberInput max={10} min={0} value={yearsExperience}>
                             <NumberInputField maxLength='2' />
                         </NumberInput>
                     </FormControl>

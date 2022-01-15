@@ -8,7 +8,7 @@ function Account({person}) {
     const { user } = useUser();
     const router = useRouter();
     const [emailInput, setEmailInput] = useState(user?.email);
-    const [nameInput, setNameInput] = useState(user?.nickname);
+    const [nameInput, setNameInput] = useState(person != null ? person.name : user?.nickname);
     const [cityInput, setCityInput] = useState(person?.city);
     const [stateInput, setStateInput] = useState(person?.state);
     const [aboutInput, setAboutInput] = useState(person?.about);
@@ -17,9 +17,6 @@ function Account({person}) {
     const [yearsExperience, setYearsExperience] = useState(person?.experience);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [errors, setErrors] = useState({});
-    const [isEditing, setIsEditing] = useState(false);
-
-    // console.log("userProfile: ", person);
 
     useEffect(() => {
         if(isSubmitting) {
@@ -33,8 +30,17 @@ function Account({person}) {
 
     const createProfile = async () => {
         try {
-            const res = await fetch('http://localhost:3000/api/profiles', {
-                method: 'POST',
+            let link;
+            let method;
+            if(person != null) {
+                link = `/api/profiles/${person._id}`;
+                method = 'PUT';
+            } else {
+                link = `/api/profiles`;
+                method = 'POST';
+            }
+            const res = await fetch(`http://localhost:3000${link}`, {
+                method: method,
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -47,7 +53,7 @@ function Account({person}) {
                     about: aboutInput,
                     category: iAm,
                     interest: interest,
-                    yearsExperience: yearsExperience
+                    experience: yearsExperience
                 })
             });
             router.push('/dashboard');
@@ -92,7 +98,7 @@ function Account({person}) {
         <Box w="75%" m="0 auto" mt="75px">
             <Box as='h1' fontSize='2xl' fontWeight='bold' mb='10'>Account</Box>
             {isSubmitting ? <CircularProgress isIndeterminate color='blue' /> :
-            <form onSubmit={isEditing && handleSubmit}>
+            <form onSubmit={handleSubmit}>
                 <Stack maxW='700px' spacing={4}>
                     <FormControl mb='5' isRequired>
                         <FormLabel htmlFor='email'>Email</FormLabel>
@@ -186,6 +192,7 @@ function Account({person}) {
                             rows="5" 
                             maxLength="300" 
                             placeholder="About ...." 
+                            value={aboutInput}
                             style={{backgroundColor: 'inherit', minWidth: '300px', maxWidth: '700px', width: '100%', border: '1px solid rgb(82,85,94, 0.6)'}} 
                             onChange={(e) => setAboutInput(e.target.value)}
                         />
@@ -208,14 +215,10 @@ function Account({person}) {
                     <FormControl onChange={(e) => setYearsExperience(e.target.value)} value={yearsExperience}>
                         <FormLabel htmlFor='number'>Years of experience</FormLabel>
                         <NumberInput max={10} min={0}>
-                            <NumberInputField maxLength='2'/>
+                            <NumberInputField maxLength='2' />
                         </NumberInput>
                     </FormControl>
-                    { isEditing ?
-                        <Button variant='outline' type='submit' mr={2}>Submit</Button>
-                        :
-                        <Button variant='outline' onClick={() => setIsEditing(true)}>Edit</Button>
-                    }
+                    <Button variant='outline' type='submit' mr={2}>Submit</Button>
                 </Stack>
             </form>
             }

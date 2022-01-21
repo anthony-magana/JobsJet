@@ -12,7 +12,7 @@ export default function Person({ profile, img }) {
 
     return (
         <Box
-          width='sm'
+          maxW='sm'
           borderWidth="1px"
           borderRadius="lg"
           overflow="hidden"

@@ -61,6 +61,8 @@ export default function Dashboard({ profiles }) {
             style={{
               transform: interpolate([rot, scale], trans),
               position: 'absolute',
+              top: 0,
+              left: 0,
               touchAction: 'none'
             }}
           >

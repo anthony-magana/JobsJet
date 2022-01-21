@@ -54,7 +54,7 @@ export default function Dashboard({ profiles }) {
     return (
     <>
       {props.map(({ x, y, rot, scale }, i) => (
-        <animated.div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', willChange: 'transform', touchAction: 'none'}} key={i} style={{ x, y }}>
+        <animated.div style={{x, y, display: 'flex', alignItems: 'center', justifyContent: 'center', willChange: 'transform', touchAction: 'none'}} key={i}>
           {/* This is the card itself, we're binding our gesture to it (and inject its index so we know which is which) */}
           <animated.div
             {...bind(i)}

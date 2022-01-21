@@ -53,7 +53,8 @@ function Account({person}) {
                     about: aboutInput,
                     category: iAm,
                     interest: interest,
-                    experience: yearsExperience
+                    experience: yearsExperience,
+                    picture: user?.picture
                 })
             });
             router.push('/dashboard');

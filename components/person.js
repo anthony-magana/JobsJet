@@ -1,10 +1,9 @@
-import { Box, Badge, Image } from "@chakra-ui/react";
-import { StarIcon } from "@chakra-ui/icons";
+import { Box, Badge, Image, IconButton } from "@chakra-ui/react";
+import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
 
-export default function Person({ profile }) {
-  
+export default function Person({ profile, img }) {
   const data = {
-    imageUrl: "https://bit.ly/2Z4KKcF",
+    imageUrl: img,
     imageAlt: "person",
     city: "Los Angeles",
     title: "Software Engineer",
@@ -13,13 +12,14 @@ export default function Person({ profile }) {
 
     return (
         <Box
-          maxW="sm"
+          width='sm'
           borderWidth="1px"
           borderRadius="lg"
           overflow="hidden"
           mt="5"
+          backgroundColor='gray.700'
         >
-          <Image src={data.imageUrl} alt={data.imageAlt} />
+          <Image src={data.imageUrl} alt={data.imageAlt} width='sm' height='350px' />
           <Box p="6">
             <Box display="flex" alignItems="baseline">
               <Badge ml='-1' pl='2' pr='2' borderRadius="full" colorScheme="teal">
@@ -35,7 +35,7 @@ export default function Person({ profile }) {
               isTruncated
               fontSize={["xs", "sm"]}
             >
-              {profile.name.toUpperCase()}
+              {profile?.name.toUpperCase()}
             </Box>
             <Box color='gray.400'>
               {data.title}
@@ -48,6 +48,10 @@ export default function Person({ profile }) {
                 </Badge>
               ))}
             </Box>
+          </Box>
+          <Box display="flex" mt="1" mr='25%' ml="25%" alignItems="center" justifyContent="center">
+              <IconButton size="lg" p='1' m='10' mt='2' aria-label="Swipe left" icon={<CloseIcon w={8} h={8} color='red.500' />} />
+              <IconButton size="lg" p='1' m='10' mt='2' aria-label="Swipe right" icon={<CheckIcon w={10} h={10} color='green.500' />} />
           </Box>
         </Box>
     )

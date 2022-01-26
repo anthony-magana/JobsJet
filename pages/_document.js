@@ -7,7 +7,7 @@ export default class Document extends NextDocument {
     return (
       <Html lang='en'>
         <Head>
-            <meta name="description" content="Jobs Jet is the all in one platform for finding a job or for hiring talent. Swipe left or right to determine if you the employer or the talent are a match. If you both swipe right, congrats you are a match!" />
+            <meta name="description" content="Jobs Jet is the all in one platform for finding a job or for hiring candidate. Swipe left or right to determine if you the employer or the candidate are a match. If you both swipe right, congrats you are a match!" />
             <link rel="icon" href="/favicon.ico" />
         </Head>
         <body>

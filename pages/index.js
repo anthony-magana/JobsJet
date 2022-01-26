@@ -16,7 +16,7 @@ export default function Home() {
         <Box display='flex' justifyContent='space-between'>
           <Box mr='10px'>
             <NextLink href='/'><Box fontWeight='bold' as='h1' maxW='md' fontSize={['lg', '2xl', '4xl']} style={{marginBottom: '20px'}}>Find the perfect match for you with just a swipe!</Box></NextLink>
-            <Text fontSize={['sm', 'md']} style={{marginBottom: '15px'}}>Match employers or talent based on field category, start now.</Text>
+            <Text fontSize={['sm', 'md']} style={{marginBottom: '15px'}}>Match employers or candidate based on field category, start now.</Text>
             <Button><NextLink href="/api/auth/login">Sign Up</NextLink></Button>
           </Box>
           <Image 

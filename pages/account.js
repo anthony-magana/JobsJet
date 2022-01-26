@@ -202,7 +202,7 @@ function Account({person}) {
                     <FormControl mb='5' isRequired>
                         <FormLabel>Who are you?</FormLabel>
                         <Select placeholder='Select' value={iAm} onChange={(e) => setIAm(e.target.value)}>
-                            <option>Talent</option>
+                            <option>candidate</option>
                             <option>Employer</option>
                         </Select>
                     </FormControl>

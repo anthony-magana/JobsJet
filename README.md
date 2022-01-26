@@ -10,7 +10,7 @@
 
 ---
 ## 🏁 [WEBSITE](https://jobs-jet.vercel.app)
-Jobs Jet is the all in one platform for finding a job or for hiring talent. Swipe left or right to determine if you the employer or the talent are a match.
+Jobs Jet is the all in one platform for finding a job or for hiring candidate. Swipe left or right to determine if you the employer or the candidate are a match.
 
 ## ⛏️ Built Using
 
@@ -21,9 +21,22 @@ Jobs Jet is the all in one platform for finding a job or for hiring talent. Swip
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+## 🔧 Getting Started
 
-First, run the development server:
+1. Clone or Fork repository
+2. `cd` to project directory
+3. Run `npm install` to install project dependencies.
+4. Create .env.local file in root project directory
+5. Add following configurations/keys to .env.local file
+    [Follow Auth0's quickstart guide](https://auth0.com/docs/quickstart/webapp/nextjs/01-login)
+    - `AUTH0_SECRET='use [openssl rand -hex 32] to generate a 32 bytes value'`
+    - `AUTH0_BASE_URL='http://localhost:3000'`
+    - `AUTH0_ISSUER_BASE_URL='https://YOUR_DOMAIN'`
+    - `AUTH0_CLIENT_ID='YOUR_CLIENT_ID'`
+    - `AUTH0_CLIENT_SECRET='YOUR_CLIENT_SECRET'`
+    - `MONGO_URI='YOUR_MONGO_URI'`
+
+run the development server:
 
 ```bash
 npm run dev

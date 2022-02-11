@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { withPageAuthRequired, useUser } from "@auth0/nextjs-auth0";
+import React, { useState, useEffect } from 'react'
+import { withPageAuthRequired, getSession } from "@auth0/nextjs-auth0";
 import Head from "next/head";
 import Link from "next/link";
 import { Box, Text, Button, Divider } from "@chakra-ui/react";
@@ -7,11 +7,19 @@ import Person from "../components/person";
 import { useSprings, animated, to as interpolate } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
 
-export default function Dashboard({ profiles }) {
-  const { user } = useUser();
+export default function Dashboard({ profiles, user }) {
+  const [inDb, setInDb] = useState(false);
 
-  // console.log(profiles);
-//   console.log(user);
+  useEffect(() => {
+    const checkUserInDb = async () => {
+      await profiles.map(profile => {
+        if(profile.email === user.email) {
+          setInDb(true);
+        }
+      })
+    }
+    checkUserInDb();
+  }, [])
 
   // These two are just helpers, they curate spring data, values that are later being interpolated into css
   const to = i => ({ x: 0, y: i * -4, scale: 1, rot: -10 + Math.random() * 20, delay: i * 100 })
@@ -74,6 +82,7 @@ export default function Dashboard({ profiles }) {
   )}
 
   return (
+    inDb ? (
     <>
       <Head>
         <title>Jobs Jet - Dashboard</title>
@@ -114,21 +123,42 @@ export default function Dashboard({ profiles }) {
         </Box>
       </Box>
     </>
-  );
+    ) 
+    : 
+    (
+      <>
+        <Head>
+          <title>Jobs Jet - Dashboard</title>
+        </Head>
+        <Box w="75%" m="0 auto" mt="75px" minH="70vh">
+          <Box display="flex" justifyContent="space-between" flexWrap='wrap'>
+            <Box>
+              <Box fontWeight="bold" as="h1" fontSize="3xl" mb="10px">
+                Dashboard
+              </Box>
+              <Box display='flex' alignItems='center'>
+                  <Text mr='5'>Welcome, {user?.nickname}, Finish Creating your profile!</Text>
+                  <Button size='sm'><Link href='/account'>Account</Link></Button>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
+      </>
+    )
+  )
 }
 
 export const getServerSideProps = withPageAuthRequired({
     async getServerSideProps(ctx) {
         // Getting user data from Auth0, returns an object like this one: {name: 'Bob', email: 'bob@email.com', email_verified: true}
-        // const user = getSession(ctx.req).user
+        const user = getSession(ctx.req).user
         const { req } = ctx;
         const res = await fetch(`http://${req.headers.host}/api/profiles`, {
             headers: { Cookie: ctx.req.headers.cookie },
         });
         const { data } = await res.json();
-        console.log('response: ', res);
         return { 
-            props: {profiles: data}
+            props: {profiles: data, user}
         }
     }
 });

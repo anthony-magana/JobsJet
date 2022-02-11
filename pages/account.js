@@ -39,7 +39,7 @@ function Account({person}) {
                 link = `/api/profiles`;
                 method = 'POST';
             }
-            const res = await fetch(`http://localhost:3000${link}`, {
+            const res = await fetch(`${link}`, {
                 method: method,
                 headers: {
                     'Accept': 'application/json',
@@ -57,6 +57,7 @@ function Account({person}) {
                     picture: user?.picture
                 })
             });
+            console.log(res);
             router.push('/dashboard');
             setIsSubmitting(false);
         } catch(err) {

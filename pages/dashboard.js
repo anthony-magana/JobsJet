@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useRef } from 'react'
 import { withPageAuthRequired, getSession } from "@auth0/nextjs-auth0";
 import Head from "next/head";
 import Link from "next/link";
@@ -9,14 +10,18 @@ import { useDrag } from '@use-gesture/react'
 
 export default function Dashboard({ profiles, user }) {
   const [inDb, setInDb] = useState(false);
+  const userCategoryRef = useRef(null);
+  const [possMatches, setPossMatches] = useState([]);
 
   useEffect(() => {
     const checkUserInDb = async () => {
       await profiles.map(profile => {
         if(profile.email === user.email) {
           setInDb(true);
+          userCategoryRef.current = profile.category;
         }
       })
+      setPossMatches(profiles.filter(profile => profile.category != userCategoryRef.current));
     }
     checkUserInDb();
   }, [])
@@ -29,7 +34,7 @@ export default function Dashboard({ profiles, user }) {
 
   function Deck() {
     const [gone] = useState(() => new Set()) // The set flags all the cards that are flicked out
-    const [props, api] = useSprings(profiles.length, i => ({ ...to(i), from: from(i) })) // Create a bunch of springs using the helpers above
+    const [props, api] = useSprings(possMatches.length, i => ({ ...to(i), from: from(i) })) // Create a bunch of springs using the helpers above
     
     // Create a gesture, we're interested in down-state, delta (current-pos - click-pos), direction and velocity
     const bind = useDrag(({ args: [index], active, movement: [mx], direction: [xDir], velocity: [vx] }) => {
@@ -52,7 +57,7 @@ export default function Dashboard({ profiles, user }) {
         }
       })
       
-      if (!active && gone.size === profiles.length)
+      if (!active && gone.size === possMatches.length)
         setTimeout(() => {
           gone.clear()
           api.start(i => to(i))
@@ -74,7 +79,7 @@ export default function Dashboard({ profiles, user }) {
               touchAction: 'none'
             }}
           >
-            <Person profile={profiles[i]} img={user?.picture} />
+            <Person profile={possMatches[i]} img={user?.picture} />
           </animated.div>
         </animated.div>
       ))}

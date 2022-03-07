@@ -58,6 +58,7 @@ function Account({person}) {
                 })
             });
             console.log(res);
+            alert('Profile Updated');
             router.push('/dashboard');
             setIsSubmitting(false);
         } catch(err) {

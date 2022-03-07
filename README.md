@@ -10,7 +10,7 @@
 
 ---
 ## 🏁 [WEBSITE](https://jobs-jet.vercel.app)
-Jobs Jet is the all in one platform for finding a job or for hiring candidate. Swipe left or right to determine if you the employer or the candidate are a match.
+Jobs Jet is the all in one platform for finding a job or for hiring candidates. Swipe left or right to determine if you the employer or the candidate are a match.
 
 ## ⛏️ Built Using
 

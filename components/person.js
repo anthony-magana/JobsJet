@@ -4,12 +4,13 @@ import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
 export default function Person({ profile, img }) {
   const data = {
     imageUrl: img,
-    imageAlt: "person",
-    city: "Los Angeles",
+    imageAlt: "Profile Picture",
+    city: profile?.city + ", " + profile?.state,
     title: "Software Engineer",
     category: profile?.category,
     about: profile?.about,
     skills: ["JavaScript", "React", "Node.js", "Express", "MongoDB"],
+    experience: profile?.experience + " years",
   };
 
     return (
@@ -38,6 +39,9 @@ export default function Person({ profile, img }) {
               <Box color='gray.400' mr='2'>
                 {data.category}
               </Box>
+            </Box>
+            <Box color='gray.400'>
+              {data?.experience + " of experience"}
             </Box>
             <Box as='p'>
               {data.about}

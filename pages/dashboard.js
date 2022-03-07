@@ -10,6 +10,7 @@ import { useDrag } from '@use-gesture/react'
 export default function Dashboard({ profiles, user }) {
   const [inDb, setInDb] = useState(false);
   const userCategoryRef = useRef(null);
+  const userNameRef = useRef(null);
   const [possMatches, setPossMatches] = useState([]);
 
   useEffect(() => {
@@ -17,6 +18,7 @@ export default function Dashboard({ profiles, user }) {
       await profiles.map(profile => {
         if(profile.email === user.email) {
           setInDb(true);
+          userNameRef.current = profile.name;
           userCategoryRef.current = profile.category;
         }
       })
@@ -99,7 +101,7 @@ export default function Dashboard({ profiles, user }) {
               Dashboard
             </Box>
             <Box display='flex' alignItems='center'>
-                <Text mr='5'>Welcome back, {user?.nickname}</Text>
+                <Text mr='5'>Welcome back, {userNameRef?.current} </Text>
                 <Button size='sm'><Link href='/account'>Account</Link></Button>
             </Box>
             <Box fontWeight="bold" as="h2" fontSize="3xl" mt="50px" mb="20px">
